@@ -1,6 +1,6 @@
 import React from 'react';
 import NumberOfEvents from '../NumberOfEvents';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper;
@@ -23,4 +23,5 @@ describe('<NumberOfEvents /> component', () => {
     NumberOfEventsWrapper.find('.number-of-events').simulate('change', eventObject);
     expect(NumberOfEventsWrapper.state('numOfEvents')).toBe('15');
   });
-})
+});
+
