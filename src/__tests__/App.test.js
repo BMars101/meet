@@ -66,5 +66,5 @@ describe('<App /> integration', () => {
     expect(AppNumOfEvents).not.toEqual(undefined);
     expect(AppWrapper.find(NumberOfEvents).props().numberOfEvents).toEqual(AppNumOfEvents);
     AppWrapper.unmount();
-  })
+  });
 })

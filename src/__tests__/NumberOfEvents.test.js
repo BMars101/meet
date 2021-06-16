@@ -1,11 +1,13 @@
 import React from 'react';
 import NumberOfEvents from '../NumberOfEvents';
+import App from '../App';
 import { shallow, mount } from 'enzyme';
 
 describe('<NumberOfEvents /> component', () => {
   let NumberOfEventsWrapper;
+  let AppWrapper;
   beforeAll(() => {
-    NumberOfEventsWrapper = shallow(<NumberOfEvents />);
+    NumberOfEventsWrapper = shallow(<NumberOfEvents updateEvents={() => {}}/>);
   })
 
   test('render text input', () => {
@@ -24,4 +26,5 @@ describe('<NumberOfEvents /> component', () => {
     expect(NumberOfEventsWrapper.state('numOfEvents')).toBe('15');
   });
 });
+
 
