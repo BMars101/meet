@@ -16,14 +16,17 @@ class App extends Component{
   }
 
   componentDidMount(){
+    //Added this.mount to address console error. Remove later if necessary
+    this.mounted = true;
     const { numberOfEvents } = this.state;
     getEvents().then((events) => {
-      this.setState({ events: events.slice(0, numberOfEvents), locations: extractLocations(events) });
-    });
-  }
-
-  componentWillUnmount(){
-    this.mounted = false;
+      if(this.mounted){
+        this.setState({ events: events.slice(0, numberOfEvents), locations: extractLocations(events) });
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    })
   }
 
   updateEvents = (location, eventCount) => {
@@ -55,11 +58,15 @@ class App extends Component{
   }  
 }
 
+componentWillUnmount(){
+  this.mounted = false;
+}
+
   render(){
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
-        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents = {this.updateEvents}/>
+        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
         <EventList events={this.state.events}/>
       </div>
     );
