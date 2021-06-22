@@ -19,8 +19,8 @@ class Event extends Component {
       return (
         <div className='default-event-info'>
           <h2 className='event-summary'>{event.summary}</h2>
-          <h4>{event.start.dateTime}</h4>
-          <p>{event.location}</p>
+          <h4>{event.location}</h4>
+          <p>{event.start.dateTime}</p>
 
         {this.state.active && (
           <div className='event-details'>
