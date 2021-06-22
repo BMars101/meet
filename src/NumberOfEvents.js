@@ -27,7 +27,7 @@ class NumberOfEvents extends Component {
   render(){
     return (
       <div className="NumberOfEvents">
-        <label className="number-label">Enter Number of Events to View: </label>
+        <label className="number-label">Filter number of events to view: </label>
         <br />
         <input 
           type="text"
