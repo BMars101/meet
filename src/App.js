@@ -29,9 +29,10 @@ class App extends Component{
     });
     if((code || isTokenValid) && this.mounted){
       getEvents().then(events => {
+        const filterEvents = events.slice(0, this.state.numberOfEvents);
         if(this.mounted){
           this.setState({
-            events, locations: extractLocations(events)
+            events: filterEvents, locations: extractLocations(events)
           });
         }
       })
@@ -46,16 +47,6 @@ class App extends Component{
         warningText: ''
       })
     }
-
-    const { numberOfEvents } = this.state;
-    getEvents().then((events) => {
-      if(this.mounted){
-        this.setState({ events: events.slice(0, numberOfEvents), locations: extractLocations(events) });
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    })
   }
 
   updateEvents = (location, eventCount) => {
