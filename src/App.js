@@ -35,7 +35,7 @@ class App extends Component{
       getEvents().then((events) => {
         const locationEvents = 
         (location === 'all')
-        ? getEvents
+        ? events
         : events.filter(
           (event) => event.location === location);
         const filterEvents = locationEvents.slice(0, numberOfEvents);
