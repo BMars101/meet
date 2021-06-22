@@ -1,22 +1,41 @@
 import React, { Component } from 'react';
 import './App.css';
 import './nprogress.css';
+import WelcomeScreen from './WelcomeScreen';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
 import { WarningAlert } from './Alert';
-import { getEvents, extractLocations } from './api';
+import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
 
 class App extends Component{
   state = {
     events: [],
     locations: [],
     numberOfEvents: 32,
-    selectedLocation: "all"
+    selectedLocation: "all",
+    showWelcomeScreen: undefined
   }
 
   componentDidMount(){
     this.mounted = true;
+    const accessToken = localStorage.getItem('access_token');
+    const isTokenValid = (await checkToken(accessToken)).error ? false : true;
+    const searchParams = new URLSearchParams(window.location.search);
+    const code = searchParams.get("code");
+
+    this.setState({
+      showWelcomeScreen: !(code || isTokenValid) 
+    });
+    if((code || isTokenValid) && this.mounted){
+      getEvents().then(events => {
+        if(this.mounted){
+          this.setState({
+            events, locations: extractLocations(events)
+          });
+        }
+      })
+    }
 
     if(!navigator.onLine){
       this.setState({
@@ -73,12 +92,14 @@ componentWillUnmount(){
 }
 
   render(){
+    if(this.state.showWelcomeScreen === undefined) return <div className="App"/>
     return (
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
         <WarningAlert text={this.state.warningText} />
         <EventList events={this.state.events}/>
+        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }}/>
       </div>
     );
   }
