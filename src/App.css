@@ -21,9 +21,33 @@ label {
   text-align: center;
   margin: auto;
 }
+.NumberOfEvents {
+  padding: 10px;
+  align-items: center;
+  text-align: center;
+  margin: auto;
+}
+
+.number-of-events {
+  margin-left: 65px;
+}
 
 .city {
   margin-left: 5%;
+}
+
+.search-label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.see-all {
+  font-size: 14px;
+}
+
+.number-label {
+  font-size: 16px;
+  font-weight: bold;
 }
 
 .details-btn {
@@ -41,17 +65,16 @@ label {
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
+.event-container {
+  display: flex;
+}
+
 .event-li {
   padding: 12px;
   margin: 5px;
-  width: 85%;
+  flex: 1;
   border: 1px solid black;
   border-radius: 4px;
-}
-
-.EventList {
-  display: flex;
-  flex-direction: column;
   width: 85%;
 }
 
