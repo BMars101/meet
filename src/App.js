@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import './nprogress.css';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import { WarningAlert } from './Alert';
 import { getEvents, extractLocations } from './api';
 
 class App extends Component{
@@ -16,8 +16,18 @@ class App extends Component{
   }
 
   componentDidMount(){
-    //Added this.mount to address console error. Remove later if necessary
     this.mounted = true;
+
+    if(!navigator.onLine){
+      this.setState({
+        warningText: 'App is offline. Events may not be up to date.'
+      });
+    }else {
+      this.setState({
+        warningText: ''
+      })
+    }
+
     const { numberOfEvents } = this.state;
     getEvents().then((events) => {
       if(this.mounted){
@@ -67,6 +77,7 @@ componentWillUnmount(){
       <div className="App">
         <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
         <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
+        <WarningAlert text={this.state.warningText} />
         <EventList events={this.state.events}/>
       </div>
     );
