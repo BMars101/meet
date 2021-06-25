@@ -43,7 +43,7 @@ class CitySearch extends Component {
     return (
       <div className="CitySearch">
         <InfoAlert text={this.state.infoText} />
-        <label className="search-label">Filter events by city: </label>
+        <label className="search-label">Search for events by city: </label>
         <br />
         <input 
           type="text"
