@@ -1,10 +1,17 @@
+body {
+  background: rgb(238, 174, 202);
+  background: linear-gradient(
+    0deg,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(235, 173, 171, 1) 100%
+  );
+}
 input {
   border: none;
   margin: 10px;
   padding: 5px 8px;
-  text-align: center;
   border-radius: 4px;
-  background-color: #f1f1f1;
+  background-color: #dddddd;
 }
 
 ul {
@@ -12,16 +19,43 @@ ul {
 }
 
 label {
+  color: #374d7e;
   margin-left: 45px;
+}
+.header {
+  margin: 0 auto;
+  padding: 20px;
+  background: rgb(135, 101, 181);
+  background: linear-gradient(
+    0deg,
+    rgba(135, 101, 181, 1) 0%,
+    rgba(55, 77, 126, 1) 100%
+  );
+  color: rgb(245, 204, 204);
+  font-size: 2.5em;
+}
+
+.heading3 {
+  text-align: center;
+  font-size: 22px;
+}
+
+.input-area {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 .CitySearch {
+  flex: 1;
   padding: 10px;
   align-items: center;
   text-align: center;
   margin: auto;
 }
 .NumberOfEvents {
+  flex: 1;
   padding: 10px;
   align-items: center;
   text-align: center;
@@ -33,11 +67,16 @@ label {
 }
 
 .city {
-  margin-left: 5%;
+  margin-left: 65px;
 }
 
 .search-label {
   font-size: 18px;
+  font-weight: bold;
+}
+
+.suggestions {
+  color: #2f436e;
   font-weight: bold;
 }
 
@@ -46,17 +85,22 @@ label {
 }
 
 .number-label {
-  font-size: 16px;
+  font-size: 18px;
   font-weight: bold;
 }
 
+.data-vis-wrapper {
+  display: flex;
+}
+
 .details-btn {
-  padding: 8px;
+  padding: 10px;
+  margin-bottom: 20px;
   border-radius: 4px;
   font-size: 14px;
   font-weight: bold;
-  background-color: #434446;
-  color: white;
+  background-color: rgb(245, 204, 204);
+  color: #505194;
   border: none;
 }
 
@@ -65,17 +109,39 @@ label {
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
-.event-container {
-  display: flex;
+.EventList {
+  margin: 20px;
+  padding: 2em;
+}
+
+.event-list {
+  margin: 0 auto;
+  width: 70%;
 }
 
 .event-li {
-  padding: 12px;
-  margin: 5px;
-  flex: 1;
-  border: 1px solid black;
+  -webkit-box-shadow: 0px 10px 13px -7px #000000,
+    5px 5px 15px 5px rgba(67, 42, 50, 0);
+  box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(67, 42, 50, 0);
+  background-color: #505194;
+  color: rgb(245, 204, 204);
+  padding: 10px;
+  margin: 20px;
   border-radius: 4px;
-  width: 85%;
+  text-align: center;
+}
+
+a {
+  color: #daddf8;
+}
+
+.default-event-info {
+  padding: 1em;
+  border: 2px solid rgb(245, 204, 204);
+}
+
+.event-details {
+  color: rgb(245, 204, 204);
 }
 
 @media only screen and (max-width: 600px) {
@@ -83,257 +149,3 @@ label {
     flex-direction: column;
   }
 }
-/* .columns {
-  display: flex;
-  flex-direction: row;
-} */
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
-
-/* @import url(https://fonts.googleapis.com/css?family=Roboto:500);
-.App {
-  text-align: center;
-  padding: 2% 5%;
-}
-
-.App * {
-  box-sizing: border-box;
-}
-
-ul {
-  padding: 0;
-  list-style: none;
-}
-
-p {
-  margin: 5px 0;
-}
-
-.display-none {
-  display: none;
-}
-.showSuggestions {
-  display: block;
-}
-
-input[type="text"],
-input[type="number"] {
-  padding: 8px 6px 8px 10px;
-  border-radius: 4px;
-  outline: none;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  line-height: 20px;
-  align-self: center;
-  height: 38px;
-}
-
-.city {
-  width: 250px;
-}
-
-.CitySearch {
-  display: flex;
-  flex-direction: column;
-  flex-basis: 300px;
-  max-width: 300px;
-  margin: auto;
-  position: relative;
-}
-
-.suggestions {
-  width: 250px;
-  position: absolute;
-  z-index: 2;
-  align-self: center;
-  margin: 0;
-  top: 43px;
-  font-size: 14px;
-  box-shadow: 10px 10px 16px -12px rgba(0, 0, 0, 0.75);
-}
-
-.suggestions > li {
-  text-align: left;
-  padding: 8px 6px 8px 10px;
-  background-color: #eee;
-  cursor: default;
-}
-
-.suggestions > li:last-child {
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
-}
-
-.suggestions > li:hover {
-  background-color: #bcdcdb;
-}
-
-.event {
-  padding: 10px 10px 35px;
-  margin-bottom: 10px;
-  text-align: left;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  position: relative;
-}
-
-.details-btn {
-  position: absolute;
-  right: 5px;
-  bottom: 5px;
-  padding: 5px 8px;
-  border-radius: 4px;
-  outline: none;
-  cursor: pointer;
-}
-
-.name {
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.group-name {
-  text-transform: uppercase;
-  font-size: 14px;
-}
-
-.going,
-.visibility {
-  font-style: italic;
-}
-
-.description {
-  overflow-x: hidden;
-}
-
-.numberOfEvents {
-  width: 200px;
-  margin: 20px auto;
-  text-align: center;
-}
-
-.button-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 20px;
-  padding: 20px;
-  font-family: sans-serif;
-}
-
-.Alert {
-  position: fixed;
-  top: 20px;
-}
-
-.data-vis-wrapper {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-.data-vis-wrapper .recharts-responsive-container {
-  min-width: 100%;
-  display: flex;
-}
-.recharts-surface {
-  overflow: visible;
-}
-
-.login-button {
-  color: #494949;
-  text-transform: uppercase;
-  text-decoration: none;
-  background: #ffffff;
-  padding: 20px;
-  border: 4px solid #494949;
-  display: inline-block;
-  transition: all 0.4s ease 0s;
-  min-width: 10rem;
-  margin: 1rem;
-}
-
-.google-btn {
-  width: 184px;
-  height: 42px;
-  margin: 1rem;
-  background-color: #4285f4;
-  border-radius: 2px;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.25);
-}
-.google-btn:hover {
-  box-shadow: 0 0 6px #4285f4;
-}
-.google-btn:active {
-  background: #1669f2;
-}
-.google-icon-wrapper {
-  position: absolute;
-  margin-top: 1px;
-  margin-left: 1px;
-  width: 40px;
-  height: 40px;
-  border-radius: 2px;
-  background-color: #fff;
-}
-.google-icon {
-  position: absolute;
-  margin-top: 11px;
-  margin-left: -8px;
-  width: 18px;
-  height: 18px;
-}
-.btn-text {
-  float: right;
-  margin: 11px 11px 0 0;
-  color: #fff;
-  font-size: 14px;
-  letter-spacing: 0.2px;
-  font-family: "Roboto";
-}
-
-@media only screen and (min-width: 992px) {
-  .data-vis-wrapper {
-    flex-direction: row;
-  }
-  .data-vis-wrapper .recharts-responsive-container {
-    flex-basis: 50%;
-    max-width: 50%;
-    min-width: auto;
-    margin: 0 auto;
-  }
-} */
