@@ -5,8 +5,10 @@ import WelcomeScreen from './WelcomeScreen';
 import EventList from './EventList';
 import CitySearch from './CitySearch';
 import NumberOfEvents from './NumberOfEvents';
+import EventGenre from './EventGenre';
 import { WarningAlert } from './Alert';
 import { getEvents, extractLocations, checkToken, getAccessToken } from './api';
+import { ScatterChart, Scatter, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 
 class App extends Component{
   state = {
@@ -17,8 +19,10 @@ class App extends Component{
     showWelcomeScreen: undefined
   }
 
+   
   async componentDidMount(){
     this.mounted = true;
+    //const { numberOfEvents } = this.state;
     const accessToken = localStorage.getItem('access_token');
     const isTokenValid = (await checkToken(accessToken)).error ? false : true;
     const searchParams = new URLSearchParams(window.location.search);
@@ -37,7 +41,6 @@ class App extends Component{
         }
       })
     }
-
     if(!navigator.onLine){
       this.setState({
         warningText: 'App is offline. Events may not be up to date.'
@@ -78,19 +81,58 @@ class App extends Component{
   }  
 }
 
+getData = () => {
+  const {locations, events} = this.state;
+  const data = locations.map((location) => {
+    const number = events.filter((event) => event.location === location).length
+    const city = location.split(', ').shift()
+    return {city, number};
+  })
+  return data;
+};
+
 componentWillUnmount(){
   this.mounted = false;
 }
 
   render(){
+    const { locations, numberOfEvents, events, warningText } = this.state;
     if(this.state.showWelcomeScreen === undefined) return <div className="App"/>
     return (
       <div className="App">
-        <CitySearch locations={this.state.locations} updateEvents={this.updateEvents}/>
-        <NumberOfEvents numberOfEvents={this.state.numberOfEvents} updateEvents={this.updateEvents}/>
-        <WarningAlert text={this.state.warningText} />
-        <EventList events={this.state.events}/>
-        <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }}/>
+        <div>
+          <div className="header">
+            <h1>Lets Meet + Code!</h1>
+          </div>
+          <div className="input-area">
+            <CitySearch locations={locations} updateEvents={this.updateEvents}/>
+            <NumberOfEvents numberOfEvents={numberOfEvents} updateEvents={this.updateEvents}/>
+          </div>
+          <WarningAlert text={warningText} />
+          <div className="data-vis-wrapper">
+            <EventGenre events={events}/>
+            <ResponsiveContainer height={400} width="60%">
+            <ScatterChart 
+              margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+            >
+            <CartesianGrid />
+            <XAxis 
+              type="category" 
+              dataKey="city" 
+            />
+            <YAxis 
+              type="number" 
+              dataKey="number" 
+              name="number of events" allowDecimals={false}
+            />
+            <Tooltip cursor={{ strokeDasharray: '3 3'}} />
+            <Scatter data={this.getData()} fill="#505194"/>
+            </ScatterChart>
+          </ResponsiveContainer>
+          </div>
+          <EventList events={events}/>
+          <WelcomeScreen showWelcomeScreen={this.state.showWelcomeScreen} getAccessToken={() => { getAccessToken() }}/>
+        </div>
       </div>
     );
   }
