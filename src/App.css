@@ -32,12 +32,7 @@ label {
     rgba(55, 77, 126, 1) 100%
   );
   color: rgb(245, 204, 204);
-  font-size: 2.5em;
-}
-
-.heading3 {
-  text-align: center;
-  font-size: 22px;
+  font-size: 1.2em;
 }
 
 .input-area {
@@ -84,6 +79,10 @@ label {
   font-size: 14px;
 }
 
+.Alert {
+  text-align: center;
+}
+
 .number-label {
   font-size: 18px;
   font-weight: bold;
@@ -91,6 +90,7 @@ label {
 
 .data-vis-wrapper {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .details-btn {
@@ -110,13 +110,11 @@ label {
 }
 
 .EventList {
-  margin: 20px;
   padding: 2em;
 }
 
 .event-list {
-  margin: 0 auto;
-  width: 70%;
+  width: 85%;
 }
 
 .event-li {
@@ -128,7 +126,6 @@ label {
   padding: 10px;
   margin: 20px;
   border-radius: 4px;
-  text-align: center;
 }
 
 a {
@@ -146,6 +143,9 @@ a {
 
 @media only screen and (max-width: 600px) {
   .EventList {
+    flex-direction: column;
+  }
+  .data-vis-wrapper {
     flex-direction: column;
   }
 }
