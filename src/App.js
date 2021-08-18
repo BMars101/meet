@@ -110,19 +110,21 @@ componentWillUnmount(){
           <WarningAlert text={warningText} />
           <div className="data-vis-wrapper">
             <EventGenre events={events}/>
-            <ResponsiveContainer height={400} width="60%">
+            <ResponsiveContainer height={400} width="100%">
             <ScatterChart 
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
             >
             <CartesianGrid />
             <XAxis 
               type="category" 
-              dataKey="city" 
+              dataKey="city"
+              name="city" 
             />
             <YAxis 
               type="number" 
               dataKey="number" 
-              name="number of events" allowDecimals={false}
+              name="number of events" 
+              allowDecimals={false}
             />
             <Tooltip cursor={{ strokeDasharray: '3 3'}} />
             <Scatter data={this.getData()} fill="#505194"/>
