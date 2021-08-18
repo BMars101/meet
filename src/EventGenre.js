@@ -14,6 +14,7 @@ const EventGenre = ({ events }) => {
 
      return { name: genre, value }
     })
+    data = data.filter(data => data.value);
     return data;
   }
 
