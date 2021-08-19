@@ -110,7 +110,7 @@ componentWillUnmount(){
           <WarningAlert text={warningText} />
           <div className="data-vis-wrapper">
             <EventGenre events={events}/>
-            <ResponsiveContainer height={400}>
+            <ResponsiveContainer height={400} width="60%" className="recharts-responsive-container">
             <ScatterChart 
               margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
             >
